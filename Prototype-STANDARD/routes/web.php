@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,8 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::resource('task',TaskController::class);
-
+Route::get('auth/google',[Controller::class,'redirect'])->name('google-auth');
+Route::get('auth/google/call-back',[Controller::class,'callbackGoogle'])->name("callbackGoogle");
 
 
 // Route::group(['middleware' => 'auth'], function()

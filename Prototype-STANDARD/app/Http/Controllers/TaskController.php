@@ -18,7 +18,6 @@ class TaskController extends Controller
     }
 
     function index(){
-
         $task=Task::All();
         return view("pages.index",compact('task'));
     }
