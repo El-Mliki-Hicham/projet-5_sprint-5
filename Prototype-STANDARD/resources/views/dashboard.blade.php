@@ -17,24 +17,35 @@
         </div>
     </div>
     @else
-    <div></div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+
+                <div class="p-6 text-gray-900">
+
+                    <table class="table">
+                        <a class="btn btn-primary" href={{route("task.create")}}>ajouter</a>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Tasks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($task as $item)
+                            <tr>
+                                <td>{{$item->id}} </td>
+                                <td>{{$item->Task}} </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
     @endif
 
-    {{-- <table class="table">
-        <a class="btn btn-primary" href={{route("task.create")}}>ajouter</a>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Tasks</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($task as $item)
-            <tr>
-                <td>{{$item->id}} </td>
-                <td>{{$item->Task}} </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table> --}}
+
 </x-app-layout>

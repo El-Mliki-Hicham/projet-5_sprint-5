@@ -32,8 +32,7 @@ class Controller extends BaseController
                 "email"=>$google_user->getEmail(),
                 "google_id"=>$google_user->getId(),
             ]);
-
-            Auth::login ($Add_user);
+            Auth::login($Add_user);
                 return redirect()->intended('task');
             }
             else{

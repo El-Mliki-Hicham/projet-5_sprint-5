@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class TaskController extends Controller
 
     function index(){
         $task=Task::All();
-        return view("dashboard",compact('task'));
+        return view("RouteServiceProvider::HOME",compact('task'));
     }
     public function create(){
 
