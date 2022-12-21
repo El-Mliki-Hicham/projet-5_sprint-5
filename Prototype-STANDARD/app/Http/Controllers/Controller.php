@@ -25,7 +25,7 @@ class Controller extends BaseController
             // dd($google_user);
             $user= User::where('google_id',$google_user->getId())->first();
 
-            if(! $user){
+                 if(! $user){
 
             $Add_user=User::create([
                 "name"=>$google_user->getName(),
