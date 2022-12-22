@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,26 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-Route::get('/dashboard',[DashboardController::class,"index"])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-require __DIR__.'/auth.php';
+Auth::routes();
 
-Route::resource('task',TaskController::class);
-Route::get('auth/google',[Controller::class,'redirect'])->name('google-auth');
-Route::get('auth/google/call-back',[Controller::class,'callbackGoogle'])->name("callbackGoogle");
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user','fireauth');
 
+// Route::get('/home/customer', [App\Http\Controllers\HomeController::class, 'customer'])->middleware('user','fireauth');
 
-// Route::group(['middleware' => 'auth'], function()
-// {
-//     Route::resource('task',TaskController::class, ['except' => ['index','create']]);
-// });
+Route::get('/email/verify', [App\Http\Controllers\Auth\ResetController::class, 'verify_email'])->name('verify')->middleware('fireauth');
+
+Route::post('login/{provider}/callback', 'Auth\LoginController@handleCallback');
+
+Route::resource('/home/profile', App\Http\Controllers\Auth\ProfileController::class)->middleware('user','fireauth');
+
+Route::resource('/password/reset', App\Http\Controllers\Auth\ResetController::class);
+
+Route::resource('/img', App\Http\Controllers\ImageController::class);
