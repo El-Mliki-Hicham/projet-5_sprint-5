@@ -33,11 +33,11 @@ class Controller extends BaseController
                 "google_id"=>$google_user->getId(),
             ]);
             Auth::login($Add_user);
-                return redirect()->intended('task');
+                return redirect()->intended('/dashboard');
             }
             else{
                 Auth::login($user);
-                return redirect()->intended('task');
+                return redirect()->intended('/dashboard');
 
             }
 

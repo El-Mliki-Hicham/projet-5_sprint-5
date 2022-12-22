@@ -18,10 +18,7 @@ class TaskController extends Controller
             $this->middleware('auth')->only(['store','update','edit','create']);
     }
 
-    function index(){
-        $task=Task::All();
-        return view("RouteServiceProvider::HOME",compact('task'));
-    }
+
     public function create(){
 
         return view('pages.create');
@@ -32,7 +29,7 @@ class TaskController extends Controller
     $task->Task = $request->Task;
     $task->save();
     if( $task->save()){
-    return redirect('task');
+    return redirect(RouteServiceProvider::HOME);
     }
     }
 }
